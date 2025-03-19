@@ -1,35 +1,35 @@
-FROM python:3-alpine3.7
+FROM python:3.9.21-alpine3.21
 ENV CFLAGS="-DSQLITE_DEFAULT_CACHE_SIZE=-8000 \
-            -DSQLITE_DEFAULT_FOREIGN_KEYS=1 \
-            -DSQLITE_DEFAULT_MEMSTATUS=0 \
-            -DSQLITE_DEFAULT_PAGE_SIZE=4096 \
-            -DSQLITE_DEFAULT_SYNCHRONOUS=0 \
-            -DSQLITE_DEFAULT_WAL_SYNCHRONOUS=0 \
-            -DSQLITE_DISABLE_DIRSYNC \
-            -DSQLITE_ENABLE_COLUMN_METADATA \
-            -DSQLITE_ENABLE_DESERIALIZE \
-            -DSQLITE_ENABLE_FTS3 \
-            -DSQLITE_ENABLE_FTS3_PARENTHESIS \
-            -DSQLITE_ENABLE_FTS4 \
-            -DSQLITE_ENABLE_FTS5 \
-            -DSQLITE_ENABLE_JSON1 \
-            -DSQLITE_ENABLE_MEMDB \
-            -DSQLITE_ENABLE_STAT4 \
-            -DSQLITE_ENABLE_STMTVTAB \
-            -DSQLITE_ENABLE_UNLOCK_NOTIFY \
-            -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT \
-            -DSQLITE_LIKE_DOESNT_MATCH_BLOBS \
-            -DSQLITE_MAX_EXPR_DEPTH=0 \
-            -DSQLITE_SOUNDEX \
-            -DSQLITE_STMTJRNL_SPILL=-1 \
-            -DSQLITE_TEMP_STORE=3 \
-            -DSQLITE_USE_ALLOCA \
-            -DSQLITE_USE_URI \
-            -DSQLITE_DEFAULT_WAL_AUTOCHECKPOINT=512 \
-            -DHAVE_USLEEP \
-            -O2 -fPIC"
+      -DSQLITE_DEFAULT_FOREIGN_KEYS=1 \
+      -DSQLITE_DEFAULT_MEMSTATUS=0 \
+      -DSQLITE_DEFAULT_PAGE_SIZE=4096 \
+      -DSQLITE_DEFAULT_SYNCHRONOUS=0 \
+      -DSQLITE_DEFAULT_WAL_SYNCHRONOUS=0 \
+      -DSQLITE_DISABLE_DIRSYNC \
+      -DSQLITE_ENABLE_COLUMN_METADATA \
+      -DSQLITE_ENABLE_DESERIALIZE \
+      -DSQLITE_ENABLE_FTS3 \
+      -DSQLITE_ENABLE_FTS3_PARENTHESIS \
+      -DSQLITE_ENABLE_FTS4 \
+      -DSQLITE_ENABLE_FTS5 \
+      -DSQLITE_ENABLE_JSON1 \
+      -DSQLITE_ENABLE_MEMDB \
+      -DSQLITE_ENABLE_STAT4 \
+      -DSQLITE_ENABLE_STMTVTAB \
+      -DSQLITE_ENABLE_UNLOCK_NOTIFY \
+      -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT \
+      -DSQLITE_LIKE_DOESNT_MATCH_BLOBS \
+      -DSQLITE_MAX_EXPR_DEPTH=0 \
+      -DSQLITE_SOUNDEX \
+      -DSQLITE_STMTJRNL_SPILL=-1 \
+      -DSQLITE_TEMP_STORE=3 \
+      -DSQLITE_USE_ALLOCA \
+      -DSQLITE_USE_URI \
+      -DSQLITE_DEFAULT_WAL_AUTOCHECKPOINT=512 \
+      -DHAVE_USLEEP \
+      -O2 -fPIC"
 RUN apk update \
-      && apk add --no-cache --virtual .build-deps build-base libressl coreutils gcc libc-dev linux-headers make tar wget tcl tcl-dev dpkg dpkg-dev \
+      && apk add --no-cache --virtual .build-deps build-base libressl coreutils gcc libc-dev linux-headers make tar wget tcl tcl-dev dpkg dpkg-dev sqlite-analyzer \
       && wget https://www.sqlite.org/src/tarball/sqlite.tar.gz?r=release -O sqlite.tar.gz -q \
       && tar xzf sqlite.tar.gz \
       && cd sqlite \
